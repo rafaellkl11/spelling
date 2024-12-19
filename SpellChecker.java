@@ -1,4 +1,6 @@
+import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Collections;
 /**
  * Escreva uma descrição da classe SpellChecker aqui.
  * 
@@ -11,6 +13,8 @@ public class SpellChecker
     private int number;
     private ArrayList<String> dictionary;
     private boolean searching;
+    private boolean palindrome;
+    private boolean anagram;
 
     /**
      * Construtor para objetos da classe SpellChecker
@@ -19,8 +23,9 @@ public class SpellChecker
     {   
         // inicializa variáveis de instância
         dictionary = dictReader.getDictionary();
-        searching = false;
-        
+        searching = false;      
+        palindrome = false;
+        anagram = false;
     }
 
     public int numberOfWord()
@@ -95,4 +100,106 @@ public class SpellChecker
         return Lista;
     }
     
+    public void insert(String newWord)
+    {   
+        int index = 0;
+        searching = false;
+        while (index < dictionary.size()){
+            if(dictionary.get(index).equals(newWord)){
+                searching = true;
+                break;
+            }
+            index++;
+        }
+        
+        if(!searching){
+            dictionary.add(newWord);
+        }
+        
+        Collections.sort(dictionary);
+        
+    }
+    
+    public boolean remove(String newWord)
+    {
+        int index = 0;
+        searching = false;
+        while (index < dictionary.size()){
+            if(dictionary.get(index).equals(newWord)){
+                searching = true;
+                break;
+            }
+            index++;
+        }
+        
+        if(searching){
+            dictionary.remove(newWord);
+        }
+        
+        Collections.sort(dictionary);
+        
+        return searching;
+    }
+    
+    public void save()
+    {
+        DictReader dictReader = new DictReader("words.txt");
+        dictReader.save(dictionary);
+    }
+    
+    public boolean isPalindrome(String word)
+    {
+        boolean palindrome = false;
+        int index = 0;
+        searching = false;
+        while (index < dictionary.size()){
+            if (dictionary.get(index).equals(word)){
+                searching = true;
+                break;
+            }
+            index++;
+        }
+        
+        if(searching){
+            if(word.equals(new StringBuilder(word).reverse().toString())){
+                palindrome = true;
+            }
+        }
+        
+        return palindrome;
+    }
+    
+    public ArrayList<String> anagrams(String word)
+    {
+        int index = 0;
+        anagram = false;
+        ArrayList<String> anagrams = new ArrayList<>();
+        while (index < dictionary.size()){
+            char[] letrasWord = word.toCharArray();
+            char[] letrasDictionary = dictionary.get(index).toCharArray();
+            
+            Arrays.sort(letrasWord);
+            Arrays.sort(letrasDictionary);
+            
+            new String(letrasWord);
+            new String(letrasDictionary);
+            
+            if(letrasDictionary.equals(letrasWord)){
+                anagram = true;
+            }
+
+            if(anagram){
+                anagrams.add(dictionary.get(index));
+                anagram = false;
+            }
+        }
+        return anagrams;
+    }
+    
+    public ArrayList<String> difference(ArrayList<String> dictionary)
+    {
+        ArrayList<String> difference = new ArrayList<>();
+        
+        return difference;
+    }
 }
