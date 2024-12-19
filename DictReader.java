@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 
-/**
+/***
  * Class DictReader offers functionality to load a dictionary from a file, 
  * and to save it back to a file.
  * 

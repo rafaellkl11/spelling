@@ -83,7 +83,16 @@ public class SpellChecker
     
     public ArrayList<String> wordsContaining(String text)
     {
-        r
+        ArrayList<String> Lista = new ArrayList<>();
+        int index = 0;
+        while (index < dictionary.size()){
+            if(dictionary.get(index).toLowerCase().contains(text.toLowerCase())){
+                Lista.add(dictionary.get(index));
+            }
+            index++;
+        }
+        
+        return Lista;
     }
     
 }
